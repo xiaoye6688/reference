@@ -2,17 +2,18 @@ name: Upstream Sync
 
 permissions:
     contents: write
+    actions: write  # 允许修改和执行工作流
 
 on:
     schedule:
-        - cron: "0 0 * * *"
-    workflow_dispatch:
+        - cron: "0 0 * * *"  # 每天午夜定时同步
+    workflow_dispatch:  # 手动触发
 
 jobs:
     sync_with_upstream:
         name: Sync with Upstream
         runs-on: ubuntu-latest
-        if: ${{ github.event.repository.fork }}
+        if: ${{ github.event.repository.fork }}  # 只在 fork 仓库时触发
 
         steps:
             - name: Checkout target repo
@@ -25,7 +26,7 @@ jobs:
                   upstream_sync_repo: jaywcjlove/reference
                   upstream_sync_branch: main
                   target_sync_branch: main
-                  test_mode: false
+                  test_mode: false  # 关闭测试模式以进行实际同步
 
             - name: Check for Failure
               if: failure()
