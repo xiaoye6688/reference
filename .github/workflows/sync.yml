@@ -26,7 +26,7 @@ jobs:
                   upstream_sync_repo: jaywcjlove/reference
                   upstream_sync_branch: main
                   target_sync_branch: main
-                  test_mode: false  # 关闭测试模式以进行实际同步
+                  test_mode: true  # 启用测试模式，验证同步操作
 
             - name: Check for Failure
               if: failure()
